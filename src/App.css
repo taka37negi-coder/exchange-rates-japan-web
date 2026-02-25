@@ -1,32 +1,30 @@
 .app {
   min-height: 100vh;
-  background: white;
+  background: #ffffff;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .watermark {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  pointer-events: none;
+  bottom: 40px;
+  right: 40px;
   opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .watermark img {
-  width: 60vw;
-  max-width: 800px;
+  width: 200px;
   height: auto;
 }
 
 .container {
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
+  position: relative;
+  z-index: 2;
 }
 
 header {
@@ -35,83 +33,144 @@ header {
 }
 
 header h1 {
-  font-size: 3.5rem;
+  font-size: 48px;
   font-weight: 700;
   color: #1a365d;
   margin-bottom: 12px;
 }
 
 .date {
-  font-size: 1.8rem;
+  font-size: 24px;
   color: #2d3748;
   margin-bottom: 8px;
 }
 
 .last-update {
-  font-size: 1.4rem;
+  font-size: 18px;
   color: #718096;
 }
 
-.input-section {
+.currency-selection {
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+  border: 2px solid #e2e8f0;
+}
+
+.currency-selection h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a365d;
+  margin-bottom: 16px;
+}
+
+.currency-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.currency-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
   background: white;
-  border-radius: 20px;
-  padding: 40px;
+  border: 2px solid #cbd5e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.currency-checkbox:hover {
+  background: #edf2f7;
+  border-color: #a0aec0;
+}
+
+.currency-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-flag {
+  font-size: 24px;
+}
+
+.checkbox-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a365d;
+}
+
+.input-section {
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 32px;
   margin-bottom: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e2e8f0;
 }
 
 .amount-display {
   text-align: center;
-  margin-bottom: 30px;
-  padding: 30px;
-  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #cbd5e0;
+  transition: all 0.2s;
+}
+
+.amount-display.clickable {
+  cursor: pointer;
+}
+
+.amount-display.clickable:hover {
+  background: #edf2f7;
+  border-color: #d4af37;
 }
 
 .currency-symbol {
-  font-size: 4rem;
-  font-weight: 700;
-  color: #ffd700;
+  font-size: 36px;
+  color: #d4af37;
+  margin-right: 8px;
+  font-weight: 600;
 }
 
 .amount {
-  font-size: 5rem;
+  font-size: 56px;
   font-weight: 700;
-  color: white;
+  color: #1a365d;
 }
 
 .quick-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .quick-btn {
   padding: 20px;
-  font-size: 1.8rem;
+  font-size: 28px;
   font-weight: 600;
   background: white;
-  border: 3px solid #e2e8f0;
+  border: 3px solid #cbd5e0;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  color: #2d3748;
+  color: #1a365d;
 }
 
 .quick-btn:hover {
-  background: #f7fafc;
-  border-color: #cbd5e0;
-  transform: translateY(-2px);
+  background: #edf2f7;
+  border-color: #a0aec0;
 }
 
 .quick-btn.active {
-  background: #1a365d;
-  border-color: #1a365d;
+  background: #d4af37;
+  border-color: #d4af37;
   color: white;
 }
 
@@ -119,27 +178,39 @@ header h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .numpad-btn {
-  padding: 25px;
-  font-size: 2rem;
+  padding: 24px;
+  font-size: 32px;
   font-weight: 600;
   background: white;
-  border: 2px solid #e2e8f0;
-  border-radius: 10px;
+  border: 2px solid #cbd5e0;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  color: #2d3748;
+  color: #1a365d;
 }
 
 .numpad-btn:hover {
-  background: #f7fafc;
-  border-color: #cbd5e0;
+  background: #edf2f7;
+  border-color: #a0aec0;
 }
 
 .numpad-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 
 .rates-section {
@@ -148,9 +219,9 @@ header h1 {
 
 .loading {
   text-align: center;
-  font-size: 2rem;
+  font-size: 24px;
   color: #718096;
-  padding: 60px;
+  padding: 40px;
 }
 
 .rates-grid {
@@ -161,80 +232,105 @@ header h1 {
 
 .rate-card {
   background: white;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s;
-  border: 2px solid transparent;
+  border: 3px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.2s;
 }
 
 .rate-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-  border-color: #ffd700;
+  border-color: #d4af37;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .rate-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 .flag {
-  font-size: 2.5rem;
+  font-size: 36px;
 }
 
 .code {
-  font-size: 1.8rem;
+  font-size: 24px;
   font-weight: 700;
   color: #1a365d;
 }
 
 .rate-value {
-  font-size: 2.8rem;
+  font-size: 36px;
   font-weight: 700;
-  color: #2d3748;
+  color: #d4af37;
   margin-bottom: 8px;
 }
 
 .rate-name {
-  font-size: 1.3rem;
+  font-size: 18px;
   color: #718096;
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 60px 40px;
+  }
+
+  header h1 {
+    font-size: 64px;
+  }
+
+  .amount {
+    font-size: 72px;
+  }
+
+  .rates-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .currency-checkboxes {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   header h1 {
-    font-size: 2.5rem;
-  }
-
-  .date {
-    font-size: 1.4rem;
-  }
-
-  .last-update {
-    font-size: 1.1rem;
-  }
-
-  .currency-symbol {
-    font-size: 3rem;
+    font-size: 32px;
   }
 
   .amount {
-    font-size: 3.5rem;
+    font-size: 40px;
   }
 
   .quick-btn {
-    font-size: 1.4rem;
-    padding: 15px;
+    font-size: 20px;
+    padding: 16px;
   }
 
   .numpad-btn {
-    font-size: 1.6rem;
-    padding: 20px;
+    font-size: 24px;
+    padding: 16px;
+  }
+
+  .rate-value {
+    font-size: 28px;
   }
 
   .rates-grid {
     grid-template-columns: 1fr;
+  }
+
+  .currency-checkboxes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .currency-selection h3 {
+    font-size: 18px;
+  }
+
+  .checkbox-label {
+    font-size: 16px;
   }
 }

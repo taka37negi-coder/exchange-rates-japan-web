@@ -20,6 +20,10 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [lastUpdate, setLastUpdate] = useState(null)
   const [customInput, setCustomInput] = useState('')
+  const [showNumpad, setShowNumpad] = useState(false)
+  const [selectedCurrencies, setSelectedCurrencies] = useState(
+    CURRENCIES.map(c => c.code)
+  )
 
   const fetchRates = async () => {
     try {
@@ -66,6 +70,17 @@ function App() {
     setAmount(newInput ? parseInt(newInput, 10) : 0)
   }
 
+  const toggleCurrency = (code) => {
+    setSelectedCurrencies(prev => {
+      if (prev.includes(code)) {
+        if (prev.length === 1) return prev
+        return prev.filter(c => c !== code)
+      } else {
+        return [...prev, code]
+      }
+    })
+  }
+
   const formatNumber = (num) => {
     return new Intl.NumberFormat('en-US', {
       minimumFractionDigits: 2,
@@ -103,8 +118,28 @@ function App() {
           <p className="last-update">Last Updated: {formatTime(lastUpdate)}</p>
         </header>
 
+        <div className="currency-selection">
+          <h3>Select Currencies to Display:</h3>
+          <div className="currency-checkboxes">
+            {CURRENCIES.map((currency) => (
+              <label key={currency.code} className="currency-checkbox">
+                <input
+                  type="checkbox"
+                  checked={selectedCurrencies.includes(currency.code)}
+                  onChange={() => toggleCurrency(currency.code)}
+                />
+                <span className="checkbox-flag">{currency.flag}</span>
+                <span className="checkbox-label">{currency.code}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
         <div className="input-section">
-          <div className="amount-display">
+          <div 
+            className="amount-display clickable"
+            onClick={() => setShowNumpad(!showNumpad)}
+          >
             <span className="currency-symbol">¥</span>
             <span className="amount">{amount.toLocaleString()}</span>
           </div>
@@ -121,22 +156,24 @@ function App() {
             ))}
           </div>
 
-          <div className="numpad">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
-              <button key={digit} className="numpad-btn" onClick={() => handleCustomInput(digit.toString())}>
-                {digit}
+          {showNumpad && (
+            <div className="numpad">
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
+                <button key={digit} className="numpad-btn" onClick={() => handleCustomInput(digit.toString())}>
+                  {digit}
+                </button>
+              ))}
+              <button className="numpad-btn" onClick={handleClear}>
+                C
               </button>
-            ))}
-            <button className="numpad-btn" onClick={handleClear}>
-              C
-            </button>
-            <button className="numpad-btn" onClick={() => handleCustomInput('0')}>
-              0
-            </button>
-            <button className="numpad-btn" onClick={handleBackspace}>
-              ⌫
-            </button>
-          </div>
+              <button className="numpad-btn" onClick={() => handleCustomInput('0')}>
+                0
+              </button>
+              <button className="numpad-btn" onClick={handleBackspace}>
+                ⌫
+              </button>
+            </div>
+          )}
         </div>
 
         <div className="rates-section">
@@ -144,7 +181,7 @@ function App() {
             <p className="loading">Loading exchange rates...</p>
           ) : (
             <div className="rates-grid">
-              {CURRENCIES.map((currency) => {
+              {CURRENCIES.filter(currency => selectedCurrencies.includes(currency.code)).map((currency) => {
                 const rate = rates[currency.code]
                 const converted = rate ? amount * rate : 0
                 return (
