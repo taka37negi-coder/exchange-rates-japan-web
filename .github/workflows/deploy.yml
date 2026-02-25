@@ -32,9 +32,12 @@ jobs:
       - name: Fix asset paths for GitHub Pages
         run: |
           cd dist
-          find . -name "*.html" -type f -exec sed -i 's|/_expo/static|/exchange-rates-japan-web/_expo/static|g' {} +
-          find . -name "*.js" -type f -exec sed -i 's|"/_expo/static|"/exchange-rates-japan-web/_expo/static|g' {} +
-          find . -name "*.js" -type f -exec sed -i "s|'/_expo/static|'/exchange-rates-japan-web/_expo/static|g" {} +
+          # Fix all asset paths in HTML and JS files
+          find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|href="/|href="/exchange-rates-japan-web/|g' {} +
+          find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|src="/|src="/exchange-rates-japan-web/|g' {} +
+          find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|"/_expo|"/exchange-rates-japan-web/_expo|g' {} +
+          find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i "s|'/_expo|'/exchange-rates-japan-web/_expo|g" {} +
+          find . -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|"/assets|"/exchange-rates-japan-web/assets|g' {} +
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -52,4 +55,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
