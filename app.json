@@ -11,13 +11,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-     "web": {
-    "bundler": "metro",
-    "output": "static",
-    "favicon": "./assets/favicon.png",
-    "baseUrl": "/exchange-rates-japan-web"
-  }
-
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/favicon.png",
+      "baseUrl": "/exchange-rates-japan-web"
     }
   }
 }
