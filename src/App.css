@@ -7,15 +7,18 @@
 
 .watermark {
   position: fixed;
-  bottom: 40px;
-  right: 40px;
-  opacity: 0.1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.08;
   pointer-events: none;
   z-index: 1;
+  width: 60%;
+  max-width: 800px;
 }
 
 .watermark img {
-  width: 200px;
+  width: 100%;
   height: auto;
 }
 
@@ -50,12 +53,44 @@ header h1 {
   color: #718096;
 }
 
+.toggle-selection-btn {
+  display: block;
+  margin: 0 auto 24px;
+  padding: 16px 32px;
+  font-size: 20px;
+  font-weight: 600;
+  background: #1a365d;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-selection-btn:hover {
+  background: #2d3748;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .currency-selection {
   background: #f7fafc;
   border-radius: 16px;
   padding: 24px;
   margin-bottom: 32px;
   border: 2px solid #e2e8f0;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .currency-selection h3 {
@@ -174,22 +209,29 @@ header h1 {
   color: white;
 }
 
+.hide-numpad-btn {
+  display: block;
+  margin: 0 auto 16px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #e2e8f0;
+  color: #1a365d;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hide-numpad-btn:hover {
+  background: #cbd5e0;
+}
+
 .numpad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .numpad-btn {
@@ -296,6 +338,10 @@ header h1 {
 }
 
 @media (max-width: 768px) {
+  .watermark {
+    width: 80%;
+  }
+
   header h1 {
     font-size: 32px;
   }
@@ -332,5 +378,10 @@ header h1 {
 
   .checkbox-label {
     font-size: 16px;
+  }
+
+  .toggle-selection-btn {
+    font-size: 18px;
+    padding: 14px 28px;
   }
 }
