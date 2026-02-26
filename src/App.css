@@ -10,7 +10,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.15;
+  opacity: 0.20;
   pointer-events: none;
   z-index: 1;
   width: 30%;
@@ -140,18 +140,18 @@ header h1 {
 }
 
 .input-section {
-  background: #f7fafc;
+  background: transparent;
   border-radius: 16px;
   padding: 32px;
   margin-bottom: 40px;
-  border: 2px solid #e2e8f0;
+  border: none;
 }
 
 .amount-display {
   text-align: center;
   margin-bottom: 24px;
   padding: 24px;
-  background: white;
+  background: transparent;
   border-radius: 12px;
   border: 2px solid #cbd5e0;
   transition: all 0.2s;
@@ -162,7 +162,7 @@ header h1 {
 }
 
 .amount-display.clickable:hover {
-  background: #edf2f7;
+  background: rgba(237, 242, 247, 0.5);
   border-color: #d4af37;
 }
 
@@ -190,7 +190,7 @@ header h1 {
   padding: 20px;
   font-size: 28px;
   font-weight: 600;
-  background: white;
+  background: transparent;
   border: 3px solid #cbd5e0;
   border-radius: 12px;
   cursor: pointer;
@@ -199,7 +199,7 @@ header h1 {
 }
 
 .quick-btn:hover {
-  background: #edf2f7;
+  background: rgba(237, 242, 247, 0.5);
   border-color: #a0aec0;
 }
 
