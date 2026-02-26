@@ -10,11 +10,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.08;
+  opacity: 0.15;
   pointer-events: none;
   z-index: 1;
-  width: 60%;
-  max-width: 800px;
+  width: 30%;
+  max-width: 400px;
 }
 
 .watermark img {
@@ -339,7 +339,7 @@ header h1 {
 
 @media (max-width: 768px) {
   .watermark {
-    width: 80%;
+    width: 40%;
   }
 
   header h1 {
