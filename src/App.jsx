@@ -93,7 +93,7 @@ function App() {
   return (
     <div className="app">
       <div className="watermark">
-        <img src="/kappodo-logo.png" alt="Kappodo" />
+        <img src={`${import.meta.env.BASE_URL}kappodo-logo.png`} alt="Kappodo" />
       </div>
 
       <div className="container">
